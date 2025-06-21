@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .form-input {
+            background-color: #374151;
+            border-color: #4B5563;
+        }
+        .form-input:focus {
+            background-color: #4B5563;
+            border-color: #A855F7;
+            color: #F3F4F6;
+        }
+        .btn-primary {
+            background-color: #9333EA; 
+        }
+        .btn-primary:hover {
+            background-color: #A855F7; 
+        }
+        .btn-secondary {
+            background-color: #4B5563; 
+        }
+        .btn-secondary:hover {
+            background-color: #5a6678;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <nav class="bg-gray-800 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="text-2xl font-bold text-white">Library <span class="text-purple-400">System</span></a>
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="text-gray-300 hover:text-purple-400 transition-colors">Home</a>
+                    <a href="/books/v1/view" class="text-gray-300 hover:text-purple-400 transition-colors">Books</a>
+                    <a href="/students/v1/view" class="text-gray-300 hover:text-purple-400 transition-colors">Students</a>
+                    <a href="/borrow-history/v1/view" class="text-gray-300 hover:text-purple-400 transition-colors">Borrow History</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-bold">Book <span class="text-purple-400">List</span></h1>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-semibold text-white mb-4">Add New Book</h2>
+            <form th:action="@{/books/v1/add}" method="post" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <input type="text" name="isbn" placeholder="ISBN" required class="p-2 border rounded form-input"/>
+                <input type="text" name="title" placeholder="Title" required class="p-2 border rounded form-input"/>
+                <input type="text" name="author" placeholder="Author" required class="p-2 border rounded form-input"/>
+                <input type="number" name="copiesAvailable" placeholder="Total Copies" required class="p-2 border rounded form-input"/>
+                <button type="submit" class="text-white p-2 rounded btn-primary">Add Book</button>
+            </form>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <form th:action="@{/books/v1/search}" method="get" class="flex gap-2">
+                    <input type="text" name="id" placeholder="Search by ID" class="p-2 border rounded w-full form-input"/>
+                    <button type="submit" class="text-white p-2 rounded btn-secondary">Search</button>
+                </form>
+                <form th:action="@{/books/v1/search}" method="get" class="flex gap-2">
+                    <input type="text" name="author" placeholder="Search by Author" class="p-2 border rounded w-full form-input"/>
+                    <button type="submit" class="text-white p-2 rounded btn-secondary">Search</button>
+                </form>
+                <form th:action="@{/books/v1/search}" method="get" class="flex gap-2">
+                    <input type="text" name="isbn" placeholder="Search by ISBN" class="p-2 border rounded w-full form-input"/>
+                    <button type="submit" class="text-white p-2 rounded btn-secondary">Search</button>
+                </form>
+                <form th:action="@{/books/v1/search}" method="get" class="flex gap-2">
+                    <input type="text" name="title" placeholder="Search by Title" class="p-2 border rounded w-full form-input"/>
+                    <button type="submit" class="text-white p-2 rounded btn-secondary">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="bg-gray-700">
+                        <th class="p-3">ID</th>
+                        <th class="p-3">ISBN</th>
+                        <th class="p-3">Title</th>
+                        <th class="p-3">Author</th>
+                        <th class="p-3">Available</th>
+                        <th class="p-3">Total</th>
+                        <th class="p-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book : ${books}" class="border-b border-gray-700 hover:bg-gray-700/50">
+                        <td class="p-3" th:text="${book.id}"></td>
+                        <td class="p-3" th:text="${book.isbn}"></td>
+                        <td class="p-3" th:text="${book.title}"></td>
+                        <td class="p-3" th:text="${book.author}"></td>
+                        <td class="p-3" th:text="${book.copiesAvailable}"></td>
+                        <td class="p-3" th:text="${book.totalCopies}"></td>
+                        <td class="p-3">
+                            <a th:href="@{'/books/v1/edit/' + ${book.id}}" class="text-purple-400 hover:underline">Edit</a>
+                            <a th:href="@{'/books/v1/delete/' + ${book.id}}" class="text-red-500 hover:underline ml-4">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 

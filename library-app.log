@@ -1,0 +1,80 @@
+2025-06-20T17:56:40.128+05:30  INFO 3872 --- [LibraryManagementSystem] [main] .LibraryManagementSystemApplicationTests : Starting LibraryManagementSystemApplicationTests using Java 21.0.4 with PID 3872 (started by abhil in C:\Users\abhil\Downloads\LibraryManagementSystem\LibraryManagementSystem)
+2025-06-20T17:56:40.133+05:30  INFO 3872 --- [LibraryManagementSystem] [main] .LibraryManagementSystemApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2025-06-20T17:56:43.570+05:30  INFO 3872 --- [LibraryManagementSystem] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20T17:56:43.977+05:30  INFO 3872 --- [LibraryManagementSystem] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 361 ms. Found 3 JPA repository interfaces.
+2025-06-20T17:56:46.658+05:30  INFO 3872 --- [LibraryManagementSystem] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-20T17:56:46.929+05:30  INFO 3872 --- [LibraryManagementSystem] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20T17:56:47.086+05:30  INFO 3872 --- [LibraryManagementSystem] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-20T17:56:48.683+05:30  INFO 3872 --- [LibraryManagementSystem] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20T17:56:48.824+05:30  INFO 3872 --- [LibraryManagementSystem] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-20T17:56:50.866+05:30  INFO 3872 --- [LibraryManagementSystem] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6dbbdf92
+2025-06-20T17:56:50.875+05:30  INFO 3872 --- [LibraryManagementSystem] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-20T17:56:51.198+05:30  WARN 3872 --- [LibraryManagementSystem] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20T17:56:51.286+05:30  INFO 3872 --- [LibraryManagementSystem] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.39
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20T17:56:54.853+05:30  INFO 3872 --- [LibraryManagementSystem] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20T17:56:55.533+05:30  INFO 3872 --- [LibraryManagementSystem] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20T17:56:57.333+05:30  WARN 3872 --- [LibraryManagementSystem] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20T17:56:57.426+05:30  INFO 3872 --- [LibraryManagementSystem] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-06-20T17:56:58.889+05:30  INFO 3872 --- [LibraryManagementSystem] [main] .LibraryManagementSystemApplicationTests : Started LibraryManagementSystemApplicationTests in 20.346 seconds (process running for 24.112)
+2025-06-20T17:57:00.381+05:30  INFO 3872 --- [LibraryManagementSystem] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20T17:57:00.392+05:30  INFO 3872 --- [LibraryManagementSystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-20T17:57:00.436+05:30  INFO 3872 --- [LibraryManagementSystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-06-20T18:09:02.831+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] c.e.L.LibraryManagementSystemApplication : Starting LibraryManagementSystemApplication using Java 21.0.4 with PID 23304 (C:\Users\abhil\Downloads\LibraryManagementSystem\LibraryManagementSystem\target\classes started by abhil in C:\Users\abhil\Downloads\LibraryManagementSystem\LibraryManagementSystem)
+2025-06-20T18:09:02.837+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] c.e.L.LibraryManagementSystemApplication : No active profile set, falling back to 1 default profile: "default"
+2025-06-20T18:09:03.011+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-06-20T18:09:03.012+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-06-20T18:09:04.954+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20T18:09:05.170+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 185 ms. Found 3 JPA repository interfaces.
+2025-06-20T18:09:06.664+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-06-20T18:09:06.711+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-20T18:09:06.713+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-06-20T18:09:06.864+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-20T18:09:06.866+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3851 ms
+2025-06-20T18:09:07.306+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-06-20T18:09:07.506+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20T18:09:07.626+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-06-20T18:09:08.504+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20T18:09:08.596+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-06-20T18:09:09.784+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@553055eb
+2025-06-20T18:09:09.793+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-06-20T18:09:10.060+05:30  WARN 23304 --- [LibraryManagementSystem] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20T18:09:10.144+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.39
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20T18:09:12.463+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20T18:09:12.798+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20T18:09:13.743+05:30  WARN 23304 --- [LibraryManagementSystem] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20T18:09:13.795+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-06-20T18:09:14.654+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-06-20T18:09:14.737+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-06-20T18:09:14.758+05:30  INFO 23304 --- [LibraryManagementSystem] [restartedMain] c.e.L.LibraryManagementSystemApplication : Started LibraryManagementSystemApplication in 13.558 seconds (process running for 14.829)
+2025-06-20T18:09:32.169+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-20T18:09:32.171+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-06-20T18:09:32.175+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-06-20T18:09:32.247+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] c.e.L.interceptor.LoggingInterceptor     : Request received | url=http://localhost:8080/books/v1/add | method=POST | remoteAddr=0:0:0:0:0:0:0:1 | params={author=djkbkshdvb, copiesAvailable=20, isbn=1234-1234-1234-124, title=jjadhsdvh}
+2025-06-20T18:09:32.879+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] c.e.L.interceptor.ValidationInterceptor  : ValidationInterceptor postHandle | url=http://localhost:8080/books/v1/add | method=POST | status=200
+2025-06-20T18:09:32.881+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] c.e.L.interceptor.LoggingInterceptor     : PostHandle | url=http://localhost:8080/books/v1/add | method=POST | status=200
+2025-06-20T18:09:32.898+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] c.e.L.interceptor.ValidationInterceptor  : ValidationInterceptor afterCompletion | url=http://localhost:8080/books/v1/add | method=POST | status=302
+2025-06-20T18:09:32.899+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-1] c.e.L.interceptor.LoggingInterceptor     : Request completed | url=http://localhost:8080/books/v1/add | method=POST | status=302
+2025-06-20T18:09:32.937+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-2] c.e.L.interceptor.LoggingInterceptor     : Request received | url=http://localhost:8080/books/v1/view | method=GET | remoteAddr=0:0:0:0:0:0:0:1 | params={}
+2025-06-20T18:09:32.994+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-2] c.e.L.interceptor.ValidationInterceptor  : ValidationInterceptor postHandle | url=http://localhost:8080/books/v1/view | method=GET | status=200
+2025-06-20T18:09:32.995+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-2] c.e.L.interceptor.LoggingInterceptor     : PostHandle | url=http://localhost:8080/books/v1/view | method=GET | status=200
+2025-06-20T18:09:33.778+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-2] c.e.L.interceptor.ValidationInterceptor  : ValidationInterceptor afterCompletion | url=http://localhost:8080/books/v1/view | method=GET | status=200
+2025-06-20T18:09:33.780+05:30  INFO 23304 --- [LibraryManagementSystem] [http-nio-8080-exec-2] c.e.L.interceptor.LoggingInterceptor     : Request completed | url=http://localhost:8080/books/v1/view | method=GET | status=200
+2025-06-20T18:09:40.160+05:30  INFO 23304 --- [LibraryManagementSystem] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-20T18:09:40.194+05:30  INFO 23304 --- [LibraryManagementSystem] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-06-20T18:09:40.205+05:30  INFO 23304 --- [LibraryManagementSystem] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20T18:09:40.213+05:30  INFO 23304 --- [LibraryManagementSystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-06-20T18:09:40.246+05:30  INFO 23304 --- [LibraryManagementSystem] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
