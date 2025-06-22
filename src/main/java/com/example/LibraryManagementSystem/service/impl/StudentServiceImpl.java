@@ -31,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO updateStudent(Long id, StudentDTO studentDTO) {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+        Student student = studentRepository.findById(id).orElseThrow(() -> new com.example.LibraryManagementSystem.exception.StudentNotFoundException("Student not found"));
         modelMapper.map(studentDTO, student);
         return modelMapper.map(studentRepository.save(student), StudentDTO.class);
     }

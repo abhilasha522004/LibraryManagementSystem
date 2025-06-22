@@ -52,9 +52,10 @@
 
         <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
             <h2 class="text-2xl font-semibold text-white mb-4">Add New Student</h2>
-            <form th:action="@{/students/v1/add}" method="post" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <form th:action="@{/students/v1/add}" method="post" class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <input type="text" name="name" placeholder="Name" required class="p-2 border rounded form-input"/>
                 <input type="text" name="email" placeholder="Email" required class="p-2 border rounded form-input"/>
+                <input type="text" name="contactNumber" placeholder="Contact Number" required class="p-2 border rounded form-input"/>
                 <button type="submit" class="text-white p-2 rounded btn-primary">Add Student</button>
             </form>
         </div>

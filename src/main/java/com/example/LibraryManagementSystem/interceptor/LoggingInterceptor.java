@@ -8,17 +8,32 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.example.LibraryManagementSystem.exception.MissingRequestIdException;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class LoggingInterceptor implements HandlerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(LoggingInterceptor.class);
 
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        String requestId = request.getHeader("X-Request-Id");
+        if (requestId == null || requestId.isEmpty()) {
+            requestId = UUID.randomUUID().toString();
+            request.setAttribute("X-Request-Id", requestId);
+        } else {
+            request.setAttribute("X-Request-Id", requestId);
+        }
+        return true;
+    }
+
+    private String getUser(HttpServletRequest request) {
+        Object user = request.getAttribute("user");
+        return user != null ? user.toString() : "anonymous";
+    }
+
     private String getParams(HttpServletRequest request) {
-        Map<String, String> params = new HashMap<>();
-        Enumeration<String> paramNames = request.getParameterNames();
+        java.util.Map<String, String> params = new java.util.HashMap<>();
+        java.util.Enumeration<String> paramNames = request.getParameterNames();
         while (paramNames.hasMoreElements()) {
             String name = paramNames.nextElement();
             params.put(name, request.getParameter(name));
@@ -27,35 +42,21 @@ public class LoggingInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("Request received | url={} | method={} | remoteAddr={} | params={}",
-                request.getRequestURL(), request.getMethod(), request.getRemoteAddr(), getParams(request));
-
-        String acceptHeader = request.getHeader("Accept"); 
-
-        if (acceptHeader != null && acceptHeader.contains("application/json")) {
-            String requestId = request.getHeader("X-Request-Id");
-            if (requestId == null || requestId.isEmpty()) {
-                throw new MissingRequestIdException("Missing X-Request-Id header");
-            }
-        }
-
-        return true;
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
+        // intentionally left blank
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        logger.info("PostHandle | url={} | method={} | status={}",
-                request.getRequestURL(), request.getMethod(), response.getStatus());
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        logger.info("Request completed | url={} | method={} | status={}",
-                request.getRequestURL(), request.getMethod(), response.getStatus());
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+        String requestId = (String) request.getAttribute("X-Request-Id");
+        String user = getUser(request);
+        String ip = request.getRemoteAddr();
+        String method = request.getMethod();
+        String url = request.getRequestURL().toString();
+        String params = getParams(request);
+        int status = response.getStatus();
         if (ex != null) {
-            logger.error("Exception occurred | url={} | method={} | error={}",
-                    request.getRequestURL(), request.getMethod(), ex.getMessage(), ex);
+            logger.error("[RequestId: {}] [User: {}] [IP: {}] [Status: {}] [method: {}] [url: {}] [params: {}] Exception: {}", requestId, user, ip, status, method, url, params, ex.getMessage(), ex);
         }
     }
 }

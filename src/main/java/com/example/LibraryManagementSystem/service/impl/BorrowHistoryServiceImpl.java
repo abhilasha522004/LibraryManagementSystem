@@ -29,10 +29,10 @@ public class BorrowHistoryServiceImpl implements BorrowHistoryService {
 
     @Override
     public BorrowHistoryDTO borrowBook(Long studentId, Long bookId) {
-        Student student = studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student not found"));
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new com.example.LibraryManagementSystem.exception.StudentNotFoundException("Student not found"));
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new com.example.LibraryManagementSystem.exception.BookNotFoundException("Book not found"));
         if (book.getCopiesAvailable() <= 0) {
-            throw new RuntimeException("No copies available");
+            throw new com.example.LibraryManagementSystem.exception.NoCopiesAvailableException("No copies available");
         }
         book.setCopiesAvailable(book.getCopiesAvailable() - 1);
         bookRepository.save(book);
@@ -47,9 +47,9 @@ public class BorrowHistoryServiceImpl implements BorrowHistoryService {
 
     @Override
     public BorrowHistoryDTO returnBook(Long borrowHistoryId) {
-        BorrowHistory borrowHistory = borrowHistoryRepository.findById(borrowHistoryId).orElseThrow(() -> new RuntimeException("Borrow history not found"));
+        BorrowHistory borrowHistory = borrowHistoryRepository.findById(borrowHistoryId).orElseThrow(() -> new com.example.LibraryManagementSystem.exception.BorrowHistoryNotFoundException("Borrow history not found"));
         if (borrowHistory.getReturnDate() != null) {
-            throw new RuntimeException("Book already returned");
+            throw new com.example.LibraryManagementSystem.exception.BookAlreadyReturnedException("Book already returned");
         }
         borrowHistory.setReturnDate(LocalDate.now());
         Book book = borrowHistory.getBook();

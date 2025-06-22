@@ -21,7 +21,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDTO addBook(BookDTO bookDTO) {
         if (bookRepository.existsByIsbn(bookDTO.getIsbn())) {
-            throw new RuntimeException("Book with this ISBN already exists");
+            throw new com.example.LibraryManagementSystem.exception.DuplicateBookException("Book with this ISBN already exists");
         }
         Book book = modelMapper.map(bookDTO, Book.class);
         book.setTotalCopies(book.getCopiesAvailable());
@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO updateBook(Long id, BookDTO bookDTO) {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
+        Book book = bookRepository.findById(id).orElseThrow(() -> new com.example.LibraryManagementSystem.exception.BookNotFoundException("Book not found"));
         modelMapper.map(bookDTO, book);
         return modelMapper.map(bookRepository.save(book), BookDTO.class);
     }
@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO getBookById(Long id) {
-        return modelMapper.map(bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found")), BookDTO.class);
+        return modelMapper.map(bookRepository.findById(id).orElseThrow(() -> new com.example.LibraryManagementSystem.exception.BookNotFoundException("Book not found")), BookDTO.class);
     }
 
     @Override

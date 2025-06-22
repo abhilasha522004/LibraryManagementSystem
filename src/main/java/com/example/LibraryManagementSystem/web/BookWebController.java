@@ -26,9 +26,15 @@ public class BookWebController {
     }
 
     @PostMapping("/add")
-    public String addBook(BookDTO bookDTO) {
-        bookService.addBook(bookDTO);
-        return "redirect:/books/v1/view";
+    public String addBook(BookDTO bookDTO, Model model) {
+        try {
+            bookService.addBook(bookDTO);
+            return "redirect:/books/v1/view";
+        } catch (Exception ex) {
+            model.addAttribute("book", bookDTO);
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "book-edit";
+        }
     }
 
     @GetMapping("/delete/{id}")
@@ -44,9 +50,15 @@ public class BookWebController {
     }
 
     @PostMapping("/update")
-    public String updateBook(BookDTO bookDTO) {
-        bookService.updateBook(bookDTO.getId(), bookDTO);
-        return "redirect:/books/v1/view";
+    public String updateBook(BookDTO bookDTO, Model model) {
+        try {
+            bookService.updateBook(bookDTO.getId(), bookDTO);
+            return "redirect:/books/v1/view";
+        } catch (Exception ex) {
+            model.addAttribute("book", bookDTO);
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "book-edit";
+        }
     }
 
     /**

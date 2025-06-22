@@ -24,15 +24,27 @@ public class BorrowHistoryWebController {
     }
 
     @PostMapping("/borrow")
-    public String borrowBook(@RequestParam Long studentId, @RequestParam Long bookId) {
-        borrowHistoryService.borrowBook(studentId, bookId);
-        return "redirect:/borrow-history/v1/view";
+    public String borrowBook(@RequestParam Long studentId, @RequestParam Long bookId, Model model) {
+        try {
+            borrowHistoryService.borrowBook(studentId, bookId);
+            return "redirect:/borrow-history/v1/view";
+        } catch (Exception ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            model.addAttribute("borrowHistory", borrowHistoryService.getAllBorrowHistory());
+            return "borrow-history-list";
+        }
     }
 
     @PostMapping("/return")
-    public String returnBook(@RequestParam Long borrowHistoryId) {
-        borrowHistoryService.returnBook(borrowHistoryId);
-        return "redirect:/borrow-history/v1/view";
+    public String returnBook(@RequestParam Long borrowHistoryId, Model model) {
+        try {
+            borrowHistoryService.returnBook(borrowHistoryId);
+            return "redirect:/borrow-history/v1/view";
+        } catch (Exception ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            model.addAttribute("borrowHistory", borrowHistoryService.getAllBorrowHistory());
+            return "borrow-history-list";
+        }
     }
 
     @PostMapping("/delete/{id}")

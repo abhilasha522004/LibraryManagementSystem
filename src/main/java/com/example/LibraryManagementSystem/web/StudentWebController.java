@@ -26,9 +26,15 @@ public class StudentWebController {
     }
 
     @PostMapping("/add")
-    public String addStudent(StudentDTO studentDTO) {
-        studentService.addStudent(studentDTO);
-        return "redirect:/students/v1/view";
+    public String addStudent(StudentDTO studentDTO, Model model) {
+        try {
+            studentService.addStudent(studentDTO);
+            return "redirect:/students/v1/view";
+        } catch (Exception ex) {
+            model.addAttribute("student", studentDTO);
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "student-edit";
+        }
     }
 
     @GetMapping("/delete/{id}")
@@ -44,9 +50,15 @@ public class StudentWebController {
     }
 
     @PostMapping("/update")
-    public String updateStudent(StudentDTO studentDTO) {
-        studentService.updateStudent(studentDTO.getId(), studentDTO);
-        return "redirect:/students/v1/view";
+    public String updateStudent(StudentDTO studentDTO, Model model) {
+        try {
+            studentService.updateStudent(studentDTO.getId(), studentDTO);
+            return "redirect:/students/v1/view";
+        } catch (Exception ex) {
+            model.addAttribute("student", studentDTO);
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "student-edit";
+        }
     }
 
     @GetMapping("/search")

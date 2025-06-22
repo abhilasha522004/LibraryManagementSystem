@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.ModelAndView;
+import java.util.Map;
 
 @Component
 public class ValidationInterceptor implements HandlerInterceptor {
@@ -17,12 +17,26 @@ public class ValidationInterceptor implements HandlerInterceptor {
     @Autowired
     private BorrowHistoryRepository borrowHistoryRepository;
 
+    private String getUser(HttpServletRequest request) {
+        Object user = request.getAttribute("user");
+        return user != null ? user.toString() : "anonymous";
+    }
+
+    private String getParams(HttpServletRequest request) {
+        Map<String, String> params = new java.util.HashMap<>();
+        java.util.Enumeration<String> paramNames = request.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+            String name = paramNames.nextElement();
+            params.put(name, request.getParameter(name));
+        }
+        return params.toString();
+    }
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (request.getMethod().equalsIgnoreCase("POST") && request.getRequestURI().equals("/borrow-history/borrow")) {
             String studentIdStr = request.getParameter("studentId");
             String bookIdStr = request.getParameter("bookId");
-            logger.info("Borrow attempt | studentId={} | bookId={}", studentIdStr, bookIdStr);
             if (studentIdStr != null && bookIdStr != null) {
                 try {
                     Long studentId = Long.parseLong(studentIdStr);
@@ -32,15 +46,29 @@ public class ValidationInterceptor implements HandlerInterceptor {
                         .stream()
                         .anyMatch(bh -> bh.getBook().getId().equals(bookId) && bh.getReturnDate() == null);
                     if (alreadyBorrowed) {
-                        logger.warn("Borrow denied | reason=already borrowed | studentId={} | bookId={}", studentId, bookId);
+                        String requestId = (String) request.getAttribute("X-Request-Id");
+                        String user = getUser(request);
+                        String ip = request.getRemoteAddr();
+                        String method = request.getMethod();
+                        String url = request.getRequestURL().toString();
+                        String params = getParams(request);
+                        logger.warn("[RequestId: {}] [User: {}] [IP: {}] [method: {}] [url: {}] [params: {}] Borrow denied | reason=already borrowed | studentId={} | bookId={}", requestId, user, ip, method, url, params, studentId, bookId);
                         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        response.getWriter().write("Student has already borrowed a copy of this book and not returned it.");
+                        try {
+                            response.getWriter().write("Student has already borrowed a copy of this book and not returned it.");
+                        } catch (java.io.IOException ioEx) {
+                            logger.error("[RequestId: {}] [User: {}] [IP: {}] IOException while writing response: {}", requestId, user, ip, ioEx.getMessage(), ioEx);
+                        }
                         return false;
-                    } else {
-                        logger.info("Borrow allowed | studentId={} | bookId={}", studentId, bookId);
                     }
                 } catch (NumberFormatException e) {
-                    logger.warn("Borrow denied | reason=invalid parameter | studentId={} | bookId={}", studentIdStr, bookIdStr);
+                    String requestId = (String) request.getAttribute("X-Request-Id");
+                    String user = getUser(request);
+                    String ip = request.getRemoteAddr();
+                    String method = request.getMethod();
+                    String url = request.getRequestURL().toString();
+                    String params = getParams(request);
+                    logger.warn("[RequestId: {}] [User: {}] [IP: {}] [method: {}] [url: {}] [params: {}] Borrow denied | reason=invalid parameter | studentId={} | bookId={}", requestId, user, ip, method, url, params, studentIdStr, bookIdStr);
                 }
             }
         }
@@ -48,15 +76,20 @@ public class ValidationInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        logger.info("ValidationInterceptor postHandle | url={} | method={} | status={}", request.getRequestURL(), request.getMethod(), response.getStatus());
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, org.springframework.web.servlet.ModelAndView modelAndView) {
+        // intentionally left blank
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        logger.info("ValidationInterceptor afterCompletion | url={} | method={} | status={}", request.getRequestURL(), request.getMethod(), response.getStatus());
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         if (ex != null) {
-            logger.error("ValidationInterceptor exception | url={} | method={} | error={}", request.getRequestURL(), request.getMethod(), ex.getMessage(), ex);
+            String requestId = (String) request.getAttribute("X-Request-Id");
+            String user = getUser(request);
+            String ip = request.getRemoteAddr();
+            String method = request.getMethod();
+            String url = request.getRequestURL().toString();
+            String params = getParams(request);
+            logger.error("[RequestId: {}] [User: {}] [IP: {}] [method: {}] [url: {}] [params: {}] ValidationInterceptor exception | error={}", requestId, user, ip, method, url, params, ex.getMessage(), ex);
         }
     }
 } 
