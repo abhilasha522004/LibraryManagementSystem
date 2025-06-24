@@ -53,16 +53,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookDTO> searchBooks(String keyword) {
         Set<Book> results = new HashSet<>();
-        // Search by ID if keyword is a number
+        
         try {
             Long id = Long.parseLong(keyword);
             bookRepository.findById(id).ifPresent(results::add);
         } catch (NumberFormatException ignored) {}
-        // Search by author
         results.addAll(bookRepository.findByAuthorContaining(keyword));
-        // Search by ISBN
         results.addAll(bookRepository.findByIsbnContaining(keyword));
-        // Also search by title or author (existing logic)
         results.addAll(bookRepository.findByTitleContainingOrAuthorContaining(keyword, keyword));
         return results.stream().map(book -> modelMapper.map(book, BookDTO.class)).collect(Collectors.toList());
     }
