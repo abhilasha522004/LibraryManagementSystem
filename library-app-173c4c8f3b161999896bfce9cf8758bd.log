@@ -1,9 +1,0 @@
-2025-06-24 11:01:46 INFO  c.e.L.LibraryManagementSystemApplication - Starting LibraryManagementSystemApplication using Java 21.0.4 with PID 25052 (D:\LibraryManagementSystem\target\classes started by abhil in D:\LibraryManagementSystem)
-2025-06-24 11:01:46 INFO  c.e.L.LibraryManagementSystemApplication - No active profile set, falling back to 1 default profile: "default"
-2025-06-24 11:01:50 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-06-24 11:01:50 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.41]
-2025-06-24 11:01:50 INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-06-24 11:01:51 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-06-24 11:01:54 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-06-24 11:01:55 INFO  c.e.L.LibraryManagementSystemApplication - Started LibraryManagementSystemApplication in 8.399 seconds (process running for 429.759)
-2025-06-24 11:01:59 INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'

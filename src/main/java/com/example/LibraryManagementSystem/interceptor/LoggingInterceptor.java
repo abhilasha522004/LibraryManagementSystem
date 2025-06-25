@@ -1,19 +1,18 @@
 package com.example.LibraryManagementSystem.interceptor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.UUID;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.LibraryManagementSystem.util.LoggerUtil;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.example.LibraryManagementSystem.exception.MissingRequestIdException;
-import org.springframework.web.servlet.ModelAndView;
-import java.util.UUID;
 
 @Component
 public class LoggingInterceptor implements HandlerInterceptor {
-    private static final Logger logger = LoggerFactory.getLogger(LoggingInterceptor.class);
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String requestId = request.getHeader("X-Request-Id");
@@ -43,7 +42,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-        // intentionally left blank
+        
     }
 
     @Override
@@ -56,7 +55,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
         String params = getParams(request);
         int status = response.getStatus();
         if (ex != null) {
-            logger.error("[RequestId: {}] [User: {}] [IP: {}] [Status: {}] [method: {}] [url: {}] [params: {}] Exception: {}", requestId, user, ip, status, method, url, params, ex.getMessage(), ex);
+            LoggerUtil.error("[RequestId: " + requestId + "] [User: " + user + "] [IP: " + ip + "] [Status: " + status + "] [method: " + method + "] [url: " + url + "] [params: " + params + "] Exception: " + ex.getMessage());
         }
     }
 }

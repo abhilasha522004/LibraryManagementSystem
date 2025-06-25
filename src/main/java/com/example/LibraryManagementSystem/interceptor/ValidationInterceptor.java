@@ -2,21 +2,18 @@ package com.example.LibraryManagementSystem.interceptor;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.example.LibraryManagementSystem.repository.BorrowHistoryRepository;
+import com.example.LibraryManagementSystem.util.LoggerUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class ValidationInterceptor implements HandlerInterceptor {
-    private static final Logger logger = LoggerFactory.getLogger(ValidationInterceptor.class);
-
     @Autowired
     private BorrowHistoryRepository borrowHistoryRepository;
 
@@ -55,12 +52,12 @@ public class ValidationInterceptor implements HandlerInterceptor {
                         String method = request.getMethod();
                         String url = request.getRequestURL().toString();
                         String params = getParams(request);
-                        logger.warn("[RequestId: {}] [User: {}] [IP: {}] [method: {}] [url: {}] [params: {}] Borrow denied | reason=already borrowed | studentId={} | bookId={}", requestId, user, ip, method, url, params, studentId, bookId);
+                        LoggerUtil.error("[RequestId: " + requestId + "] [User: " + user + "] [IP: " + ip + "] [method: " + method + "] [url: " + url + "] [params: " + params + "] Borrow denied | reason=already borrowed | studentId=" + studentId + " | bookId=" + bookId);
                         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         try {
                             response.getWriter().write("Student has already borrowed a copy of this book and not returned it.");
                         } catch (java.io.IOException ioEx) {
-                            logger.error("[RequestId: {}] [User: {}] [IP: {}] IOException while writing response: {}", requestId, user, ip, ioEx.getMessage(), ioEx);
+                            LoggerUtil.error("[RequestId: " + requestId + "] [User: " + user + "] [IP: " + ip + "] IOException while writing response: " + ioEx.getMessage() + " Exception: " + ioEx);
                         }
                         return false;
                     }
@@ -71,7 +68,7 @@ public class ValidationInterceptor implements HandlerInterceptor {
                     String method = request.getMethod();
                     String url = request.getRequestURL().toString();
                     String params = getParams(request);
-                    logger.warn("[RequestId: {}] [User: {}] [IP: {}] [method: {}] [url: {}] [params: {}] Borrow denied | reason=invalid parameter | studentId={} | bookId={}", requestId, user, ip, method, url, params, studentIdStr, bookIdStr);
+                    LoggerUtil.error("[RequestId: " + requestId + "] [User: " + user + "] [IP: " + ip + "] [method: " + method + "] [url: " + url + "] [params: " + params + "] Borrow denied | reason=invalid parameter | studentId=" + studentIdStr + " | bookId=" + bookIdStr);
                 }
             }
         }
@@ -92,7 +89,7 @@ public class ValidationInterceptor implements HandlerInterceptor {
             String method = request.getMethod();
             String url = request.getRequestURL().toString();
             String params = getParams(request);
-            logger.error("[RequestId: {}] [User: {}] [IP: {}] [method: {}] [url: {}] [params: {}] ValidationInterceptor exception | error={}", requestId, user, ip, method, url, params, ex.getMessage(), ex);
+            LoggerUtil.error("[RequestId: " + requestId + "] [User: " + user + "] [IP: " + ip + "] [method: " + method + "] [url: " + url + "] [params: " + params + "] ValidationInterceptor exception | error=" + ex.getMessage());
         }
     }
 } 
